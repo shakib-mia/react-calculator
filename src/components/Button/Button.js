@@ -1,8 +1,9 @@
 import React from 'react';
+import "./Button.css"
 
-const Button = ({number, onclick}) => {
+const Button = ({number, onclick, bgColor}) => {
     return (
-        <button className='bg-red-400 px-[15px] py-[5px]' onClick={onclick}>{number}</button>
+        <button className={`px-[15px] py-[5px] rounded-[5px] bg-[${bgColor}] text-[#d4d4d4]`} onClick={onclick}>{number}</button>
     );
 };
 

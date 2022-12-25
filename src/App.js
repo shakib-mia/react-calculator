@@ -1,23 +1,72 @@
 import './App.css';
 import Button from './components/Button/Button';
-import {useState} from 'react'
+import { useState } from 'react'
 
 function App() {
-  const characters = [7,8,9,4,5,6,1,2,3,".",0,"C"];
-  const symbols = ["+","-","*","/","=","%","^","!"]
+  const characters = [
+    7,8,9,
+    4,5,6,
+    1,2,3,
+    ".",0,"C"
+  ];
 
-  const [number, setNumber] = useState(0);
+  const symbols = [
+    <>&times;</>,"/",
+    "=","%",
+    "^","!",
+    "+","-"
+  ]
+
+  const [number, setNumber] = useState("");
+
+  const factorial = () => {
+    const numbers = [];
+    let fact = 1;
+    for (let index = number; index > 0; index--) {
+      const result = parseFloat(index);
+      numbers.push(result);
+    }
+
+    for (const number of numbers) {
+      fact = fact * number
+    }
+    setNumber(fact);
+  }
 
   return (
-    <div className="w-1/2 mx-auto">
-      <h2>{number}</h2>
-      <div className='flex gap-4'>
+    <div className="w-11/12 md:w-1/2 lg:w-1/5 mx-auto bg-[#303136] my-10 rounded-[5px]">
+      <div className='h-[150px] flex items-center justify-end'>
+        <h2 className="p-5 text-white text-[50px] overflow-x-auto">
+          {number ? number : "0"}
+        </h2>
+      </div>
+      <div className='flex gap-4 p-5 rounded-b-[5px]'>
         <main className="grid grid-cols-3 gap-4 w-3/5">
-          {characters.map(item => <Button key={item} number={item} onclick={e => setNumber(e.target.innerText)} />)}
+          {characters.map(item => <Button 
+            key={item} 
+            number={item} 
+            bgColor="#494a51"
+            onclick={() => {
+              item !== "C" && setNumber(number + item);
+              item === "C" &&  setNumber("");
+              item === <>&times;</> && setNumber(number + "*")
+            }} 
+          />)}
         </main>
-        <div className="grid grid-cols-2 gap-4 w-2/5">
-          {symbols.map(item => <Button key={item} number={item} onclick={e => console.log(e.target.innerText)} />)}
-        </div>
+        <main className="grid grid-cols-2 gap-4 w-2/5">
+          {symbols.map(item => <Button 
+            key={item} 
+            number={item} 
+            bgColor="#f00"
+            onclick={e => {
+              item !== "=" && item !== <>&times;</> && setNumber(number + item) 
+              item === "=" && setNumber(eval(number));
+              // item === <>&times;</> && setNumber(number + '');
+              console.log(item.props.children === "[object Object]");
+              item === '!' && factorial()
+            }} 
+          />)}
+        </main>
       </div>
     </div>
   );
