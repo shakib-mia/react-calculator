@@ -44,8 +44,8 @@ function App() {
           {number ? number : "0"}
         </h2>
       </div>
-      <div className='flex gap-4 p-5 rounded-b-[5px]'>
-        <main className="grid grid-cols-3 gap-4 w-3/5">
+      <div className='flex p-5 rounded-b-[5px] gap-2'>
+        <main className="grid grid-cols-3 w-3/5">
           {characters.map(item => <Button 
             key={item} 
             number={item} 
@@ -58,11 +58,10 @@ function App() {
             }} 
           />)}
         </main>
-        <main className="grid grid-cols-2 gap-4 w-2/5">
+        <main className="grid grid-cols-2 w-2/5">
           {symbols.map(item => <Button 
             key={item} 
-            number={item} 
-            bgColor="#f00"
+            number={item}
             onclick={e => {
               item !== "=" && item !== <>&times;</> && setNumber(number + item)
               item === '=' && setNumber(number.split("").indexOf(multiplyIcon) !== -1 ? number.split(multiplyIcon).map(item => item)[0] * number.split(multiplyIcon).map(item => item)[1] : number.split("").indexOf(divideIcon) !== -1 ? number.split(divideIcon).map(item => item)[0] / number.split(divideIcon).map(item => item)[1] : eval(number));
