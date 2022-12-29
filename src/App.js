@@ -37,6 +37,14 @@ function App() {
     setNumber(fact);
   }
 
+  const calculate = (item) => {
+    item !== "=" && item !== <>&times;</> && setNumber(number + item)
+    item === '=' && setNumber(number.split("").indexOf(multiplyIcon) !== -1 ? number.split(multiplyIcon).map(item => item)[0] * number.split(multiplyIcon).map(item => item)[1] : number.split("").indexOf(divideIcon) !== -1 ? number.split(divideIcon).map(item => item)[0] / number.split(divideIcon).map(item => item)[1] : eval(number));
+    item === '!' && factorial();
+    item === "←" && setNumber(number.slice(0, number.length - 1));
+    item === "%" && setNumber(number.split(multiplyIcon)[0] * number.split(multiplyIcon)[1] / 100)
+  }
+
   return (
     <div className="w-11/12 md:w-1/2 lg:w-1/5 mx-auto bg-[#303136] my-10 rounded-[5px]">
       <div className='h-[150px] flex items-center justify-end'>
@@ -62,13 +70,7 @@ function App() {
           {symbols.map(item => <Button 
             key={item} 
             number={item}
-            onclick={e => {
-              item !== "=" && item !== <>&times;</> && setNumber(number + item)
-              item === '=' && setNumber(number.split("").indexOf(multiplyIcon) !== -1 ? number.split(multiplyIcon).map(item => item)[0] * number.split(multiplyIcon).map(item => item)[1] : number.split("").indexOf(divideIcon) !== -1 ? number.split(divideIcon).map(item => item)[0] / number.split(divideIcon).map(item => item)[1] : eval(number));
-              item === '!' && factorial();
-              item === "←" && setNumber(number.slice(0, number.length - 1));
-              item === "%" && setNumber(number.split(multiplyIcon)[0] * number.split(multiplyIcon)[1] / 100)
-            }} 
+            onclick={() => calculate(item)}
           />)}
         </main>
       </div>
