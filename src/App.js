@@ -10,12 +10,14 @@ function App() {
     ".",0,"C"
   ];
 
-  const multiplyIcon = "×"
+  const multiplyIcon = "×";
+  const divideIcon = "÷"
+  const leftArrow = "←";
 
   const symbols = [
-    multiplyIcon,"/",
+    multiplyIcon, divideIcon,
     "=","%",
-    "^","!",
+    leftArrow,"!",
     "+","-"
   ]
 
@@ -65,8 +67,9 @@ function App() {
               // item === "=" && setNumber(eval(number));
               // item === <>&times;</> && setNumber(number + '');
               // item === '=' && console.log(number.split("").indexOf(multiplyIcon) !== -1);
-              item === '=' && setNumber(number.split("").indexOf(multiplyIcon) !== -1 ? number.split(multiplyIcon).map(item => item)[0] * number.split(multiplyIcon).map(item => item)[1] : eval(number));
-              item === '!' && factorial()
+              item === '=' && setNumber(number.split("").indexOf(multiplyIcon) !== -1 ? number.split(multiplyIcon).map(item => item)[0] * number.split(multiplyIcon).map(item => item)[1] : number.split("").indexOf(divideIcon) !== -1 ? number.split(divideIcon).map(item => item)[0] / number.split(divideIcon).map(item => item)[1] : eval(number));
+              item === '!' && factorial();
+              item === "←" && setNumber(number.slice(0, number.length - 1))
             }} 
           />)}
         </main>
