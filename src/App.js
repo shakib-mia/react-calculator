@@ -10,8 +10,10 @@ function App() {
     ".",0,"C"
   ];
 
+  const multiplyIcon = "×"
+
   const symbols = [
-    <>&times;</>,"/",
+    multiplyIcon,"/",
     "=","%",
     "^","!",
     "+","-"
@@ -60,9 +62,10 @@ function App() {
             bgColor="#f00"
             onclick={e => {
               item !== "=" && item !== <>&times;</> && setNumber(number + item) 
-              item === "=" && setNumber(eval(number));
+              // item === "=" && setNumber(eval(number));
               // item === <>&times;</> && setNumber(number + '');
-              console.log(item.props.children === "[object Object]");
+              // item === '=' && console.log(number.split("").indexOf(multiplyIcon) !== -1);
+              item === '=' && setNumber(number.split("").indexOf(multiplyIcon) !== -1 ? number.split(multiplyIcon).map(item => item)[0] * number.split(multiplyIcon).map(item => item)[1] : eval(number));
               item === '!' && factorial()
             }} 
           />)}
