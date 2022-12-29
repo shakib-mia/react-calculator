@@ -48,7 +48,7 @@ function App() {
   return (
     <div className="w-11/12 md:w-1/2 lg:w-1/5 mx-auto bg-[#303136] my-10 rounded-[5px]">
       <div className='h-[150px] flex items-center justify-end'>
-        <h2 className="p-5 text-white text-[50px] overflow-x-auto">
+        <h2 className="p-5 text-white text-[50px] overflow-x-auto" id="screen">
           {number ? number : "0"}
         </h2>
       </div>
