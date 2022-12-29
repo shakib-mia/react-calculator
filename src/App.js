@@ -15,10 +15,10 @@ function App() {
   const leftArrow = "←";
 
   const symbols = [
-    multiplyIcon, divideIcon,
-    "=","%",
     leftArrow,"!",
-    "+","-"
+    multiplyIcon, divideIcon,
+    "+","-",
+    "%","="
   ]
 
   const [number, setNumber] = useState("");
@@ -50,6 +50,7 @@ function App() {
             key={item} 
             number={item} 
             bgColor="#494a51"
+            leftArrow={leftArrow}
             onclick={() => {
               item !== "C" && setNumber(number + item);
               item === "C" &&  setNumber("");
@@ -63,13 +64,11 @@ function App() {
             number={item} 
             bgColor="#f00"
             onclick={e => {
-              item !== "=" && item !== <>&times;</> && setNumber(number + item) 
-              // item === "=" && setNumber(eval(number));
-              // item === <>&times;</> && setNumber(number + '');
-              // item === '=' && console.log(number.split("").indexOf(multiplyIcon) !== -1);
+              item !== "=" && item !== <>&times;</> && setNumber(number + item)
               item === '=' && setNumber(number.split("").indexOf(multiplyIcon) !== -1 ? number.split(multiplyIcon).map(item => item)[0] * number.split(multiplyIcon).map(item => item)[1] : number.split("").indexOf(divideIcon) !== -1 ? number.split(divideIcon).map(item => item)[0] / number.split(divideIcon).map(item => item)[1] : eval(number));
               item === '!' && factorial();
-              item === "←" && setNumber(number.slice(0, number.length - 1))
+              item === "←" && setNumber(number.slice(0, number.length - 1));
+              item === "%" && setNumber(number.split(multiplyIcon)[0] * number.split(multiplyIcon)[1] / 100)
             }} 
           />)}
         </main>
