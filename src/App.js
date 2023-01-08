@@ -13,6 +13,8 @@ function App() {
   const multiplyIcon = "×";
   const divideIcon = "÷"
   const leftArrow = "←";
+  const plusIcon = "+";
+  const minusIcon = "-";
 
   const symbols = [
     leftArrow,"!",
@@ -61,12 +63,17 @@ function App() {
   }
 
   const calculate = (item) => {
-    item !== "=" && item !== <>&times;</> && setNumber(number + item)
-    item === '=' && setNumber(number.split("").indexOf(multiplyIcon) !== -1 
-      ? 
-      number.split(multiplyIcon).map(item => item)[0] * number.split(multiplyIcon).map(item => item)[1] 
-      : number.split("").indexOf(divideIcon) !== -1 ? number.split(divideIcon).map(item => item)[0] / number.split(divideIcon).map(item => item)[1] 
-      : trig.map(tri => number.includes(tri) && calculateTrigon(tri, number)));
+    item !== "=" && item !== <>&times;</> && setNumber(number + item);
+    const result = number.split("").indexOf(multiplyIcon) !== -1 
+    ? 
+    number.split(multiplyIcon).map(item => item)[0] * number.split(multiplyIcon).map(item => item)[1] 
+    : number.split("").indexOf(divideIcon) !== -1 ? number.split(divideIcon).map(item => item)[0] / number.split(divideIcon).map(item => item)[1] 
+    : number.split("").indexOf(plusIcon) !== -1 ? eval(number) 
+    : number.split("").indexOf(minusIcon) !== -1 ? eval(number) 
+    : trig.map(tri => number.includes(tri) && calculateTrigon(tri, number))
+    
+
+    item === '=' && setNumber(result);
     item === '!' && factorial();
     item === "←" && setNumber(number.slice(0, number.length - 1));
     item === "%" && setNumber(number.split(multiplyIcon)[0] * number.split(multiplyIcon)[1] / 100)
